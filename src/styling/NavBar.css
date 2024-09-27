@@ -1,0 +1,69 @@
+/* Base Navbar styling */
+.navbar {
+  background-color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  color: #fff;
+}
+
+.navbar-logo img {
+  color: #fff;
+  font-size: 12px;
+  height: 60px;
+  width: 60px;
+}
+
+.cart-icon img{
+  color: #fff;
+  font-size: 12px;
+  height: 60px;
+  width: 60px;
+}
+
+/* Navbar links */
+.navbar-links {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links .nav-item {
+  margin-left: 20px;
+}
+
+.navbar-links a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 15px;
+}
+
+.navbar-links a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.language-selector,
+.currency-selector {
+  margin-right: 10px;
+}
+
+.language-selector select,
+.currency-selector select {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.lang-currency{
+  display: flex;
+}
