@@ -28,8 +28,8 @@ const ShoppingCart = () =>{
         setLanguage={setLanguage}
         selectedCurrency={selectedCurrency}
         setCurrency={setCurrency}/></div>
-  <div className='cart-components'>
-  
+        <h1 className='secure-checkout'>Secure Checkout</h1>
+<div className='cart-components'>
         {/* Cart component placed below cards */}
         <Cart
           cartItems={cartItems} 

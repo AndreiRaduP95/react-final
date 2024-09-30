@@ -1,18 +1,35 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import CartActionsHandler from '../../services/CartActionsHandler';
 
 
-const Cart = ({ onRemove, onUpdateQuantity }) => {
+const Cart = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [currentDescription, setCurrentDescription] = useState('');
   const [cartItems, setCartItems] = useState([]); // Cart state
-
+   
+// Load cart items from 'cart-products' in localStorage when the component mounts
+   useEffect(() => {
+    const storedCartItems = JSON.parse(localStorage.getItem('cart-products')) || [];
+    setCartItems(storedCartItems);
+  }, []);
+// Function to update localStorage
+const updateLocalStorage = (updatedCartItems) => {
+  localStorage.setItem('cart-products', JSON.stringify(updatedCartItems));
+};
+ // Function to remove item from cart and update localStorage
+ const handleRemove = (productId) => {
+  const updatedCartItems = cartItems.filter((item) => item.id !== productId);
+  setCartItems(updatedCartItems); // Update state
+  updateLocalStorage(updatedCartItems); // Update localStorage
+};
   // Function to calculate total price
   const calculateTotal = () => {
     return cartItems
       .reduce((total, item) => total + item.price * item.quantity, 0)
       .toFixed(2); // Ensure total is rounded to 2 decimal places
   };
+const { updateCartQuantity } = CartActionsHandler({ cartItems, setCartItems });
 
   const handlePopupOpen = (description) => {
     setCurrentDescription(description);
@@ -26,7 +43,10 @@ const Cart = ({ onRemove, onUpdateQuantity }) => {
 
   return (
     <div className='cart'>
-      <h2>Cart details</h2>
+      <h2>Cart summary</h2>
+      {cartItems.length === 0 ? (
+        <p>Your shopping cart is empty.</p> 
+      ) : (
         <>
           <ul>
             {cartItems.map((item) => (
@@ -46,7 +66,7 @@ const Cart = ({ onRemove, onUpdateQuantity }) => {
                 </div>
                 <button
                   className='quantity-btn'
-                  onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
+                  onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
                   disabled={item.quantity <= 1}
                 >
                   −
@@ -54,14 +74,14 @@ const Cart = ({ onRemove, onUpdateQuantity }) => {
                 <span>{item.quantity}</span>
                 <button
                   className='quantity-btn'
-                  onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+                  onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
                 >
                   +
                 </button>
 
                 <button
                   className='remove-btn'
-                  onClick={() => onRemove(item.id)}
+                  onClick={() => handleRemove(item.id)}
                 >
                   Remove
                 </button>
@@ -71,10 +91,9 @@ const Cart = ({ onRemove, onUpdateQuantity }) => {
           {/* Display the total price */}
           <div className='cart-total'>
             <h3>Total Price: {calculateTotal()} USD</h3>
-          </div>
+          </div> 
         </>
-    
-
+      )}
       {/* Popup for product description */}
       {showPopup && (
         <div className='popup-overlay'>
@@ -83,12 +102,12 @@ const Cart = ({ onRemove, onUpdateQuantity }) => {
             <p>{currentDescription}</p>
             <button className='close-btn' onClick={handlePopupClose}>
               Close
-            </button>
+            </button>           
           </div>
         </div>
       )}
     </div>
-  );
+    );
 };
 
 export default Cart;
