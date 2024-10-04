@@ -23,6 +23,16 @@
   
   p{
     color: white;
+    text-align:center;
   }
 
+  .home-container{
+    padding: 10px 0 10px 10px;
+    width:60rem;
+    margin-left: 22vw;
+    margin-right: 35vw;
+    background-color: transparent;
+    backdrop-filter: blur(3px); 
+    transition: backdrop-filter  ease-out; /* Smooth transition if needed */
+  }
   

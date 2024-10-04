@@ -15,3 +15,14 @@ a{
   color: white;
   text-decoration: none;
 }
+.contact-container{
+    padding: 10px 0 10px 10px;
+    max-width:fit-content;
+    margin-left: 35vw;
+    margin-right: 35vw;
+    background-color: transparent;
+    backdrop-filter: blur(3px); 
+    transition: backdrop-filter  ease-out; /* Smooth transition if needed */
+    
+}
+

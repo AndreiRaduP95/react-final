@@ -32,7 +32,7 @@ const Cards = ({
       )}
       <div className='card-body'>
         <h2 className='product_name'>{product_name}</h2>
-        <p className='price'>{price} USD</p>
+        <p className='price'>{price} USD </p>
         <p className='card-content'>{content}</p>
         {buttonText && (
           <button onClick={AddToCart} className='card-button'>

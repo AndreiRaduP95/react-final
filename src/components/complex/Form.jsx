@@ -34,12 +34,6 @@ const Form = () => {
     if (!formData.address) formErrors.address = 'Address is required';
 
     setErrors(formErrors);
-
-    // If no errors, submit the form
-    if (Object.keys(formErrors).length === 0) {
-      console.log('Form Data:', formData);
-      alert('Form submitted successfully');
-    }
   };
 
   return (

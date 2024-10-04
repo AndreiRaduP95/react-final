@@ -4,20 +4,24 @@ import '../../styling/NavBar.css';
 import '../../styling/Home.css';
 import { useState } from 'react';
 
+
 const Home = () => {
   const [selectedLanguage, setLanguage] = useState('en');
   const [selectedCurrency, setCurrency] = useState('USD');
   return (
-    
+
     <div className='home-page'>
+      
       <Navbar selectedLanguage={selectedLanguage}
         setLanguage={setLanguage}
         selectedCurrency={selectedCurrency}
         setCurrency={setCurrency}/>
+
+      <div className='home-container'>
       <section className='company-info'>
         <h2>About Us</h2>
         <p>
-          Test Company is a leading provider of cutting-edge technology solutions, 
+          Shopware is a leading provider of cutting-edge technology solutions, 
           offering scalable services for businesses of all sizes. We are committed to 
           bringing you innovative products that transform the way you operate.
         </p>
@@ -41,6 +45,7 @@ const Home = () => {
           <li>Collaboration: We believe that teamwork and partnerships drive success.</li>
         </ul>
       </section>
+      </div> 
     </div>
   );
 };

@@ -12,7 +12,7 @@ const Navbar = ({
   return (
     <nav className='navbar'>
       <div className='navbar-logo'>
-      <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt='MyApp Logo' />
+      <Link to='/home'><img src={`${process.env.PUBLIC_URL}/logo.png`} alt='Shopware Logo'/></Link>
       </div>
       <ul className='navbar-links'>
         <li className='nav-item'>

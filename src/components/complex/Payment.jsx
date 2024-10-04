@@ -42,12 +42,6 @@ const PaymentForm = () => {
     }
 
     setErrors(formErrors);
-
-    // If no errors, submit the form
-    if (Object.keys(formErrors).length === 0) {
-      console.log('Payment Info:', formData);
-      alert('Order placed successfully!');
-    }
   };
 
   return (
@@ -124,3 +118,4 @@ const PaymentForm = () => {
 };
 
 export default PaymentForm;
+

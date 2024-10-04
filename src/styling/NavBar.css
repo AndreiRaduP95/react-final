@@ -4,15 +4,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  padding: 5px;
   color: #fff;
 }
 
 .navbar-logo img {
   color: #fff;
   font-size: 12px;
-  height: 60px;
-  width: 60px;
+  height: 70px;
+  width: 70px;
+  margin-left: 20px;
 }
 
 .cart-icon img{

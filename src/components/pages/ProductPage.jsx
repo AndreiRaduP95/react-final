@@ -2,7 +2,6 @@ import '../../styling/Card.css';
 import '../../styling/NavBar.css';
 import Navbar from '../complex/NavBar';
 import ProductFetcher from '../../services/ProductFetcher';
-import '../../styling/App.css';
 import { useState } from 'react';
 import Card from '../complex/Card';
 

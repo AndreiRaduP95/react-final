@@ -4,9 +4,10 @@ import Form from '../complex/Form';
 import PaymentForm from '../complex/Payment';
 import CartActionsHandler from '../../services/CartActionsHandler';
 import { useState,useEffect} from 'react';
-import '../../styling/App.css';
 import '../../styling/NavBar.css';
 import '../../styling/ShoppingCartPage.css';
+
+
 
 const ShoppingCart = () =>{
   const [selectedLanguage, setLanguage] = useState('en');
@@ -38,6 +39,7 @@ const ShoppingCart = () =>{
         />
         <Form /> 
         <PaymentForm />
+        
         </div>
       </div>
     
