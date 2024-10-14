@@ -3,6 +3,8 @@ import "../../styling/NavBar.css";
 import { Link } from 'react-router-dom';
 
 
+
+
 const Navbar = ({
   setLanguage,
   selectedLanguage,

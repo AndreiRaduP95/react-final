@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import CartActionsHandler from '../../services/CartActionsHandler';
+import { convertPrice } from '../../services/Currency';
 
 
-const Cart = () => {
+const Cart = ({selectedCurrency, currencyRates}) => {
   const [showPopup, setShowPopup] = useState(false);
   const [currentDescription, setCurrentDescription] = useState('');
   const [cartItems, setCartItems] = useState([]); // Cart state
@@ -23,11 +24,22 @@ const updateLocalStorage = (updatedCartItems) => {
   setCartItems(updatedCartItems); // Update state
   updateLocalStorage(updatedCartItems); // Update localStorage
 };
-  // Function to calculate total price
+ // Function to convert cart item prices based on selected currency
+ const convertCartItemPrice = (priceInEUR) => {
+  if (currencyRates[selectedCurrency]) {
+    return convertPrice(priceInEUR, selectedCurrency, currencyRates);
+  }
+  return priceInEUR; // Default to EUR if no rate available
+};
+  // Function to calculate total price with currency conversion
   const calculateTotal = () => {
-    return cartItems
-      .reduce((total, item) => total + item.price * item.quantity, 0)
-      .toFixed(2); // Ensure total is rounded to 2 decimal places
+    const total = cartItems.reduce((acc, item) => {
+      // Convert price based on the selected currency
+      const convertedPrice = convertPrice(item.price, selectedCurrency, currencyRates);
+      return acc + convertedPrice * item.quantity;
+    }, 0);
+    
+    return total.toFixed(2);  // Return the total, rounded to 2 decimal places
   };
 const { updateCartQuantity } = CartActionsHandler({ cartItems, setCartItems });
 
@@ -54,7 +66,7 @@ const { updateCartQuantity } = CartActionsHandler({ cartItems, setCartItems });
                 <div className='cart-item-details'>
                   <h3 className='product-name'>{item.product_name}</h3>
                   <p className='product-price'>
-                    {(item.price * item.quantity).toFixed(2)} USD
+                  {(convertCartItemPrice(item.price) * item.quantity).toFixed(2)} {selectedCurrency}
                   </p>
 
                   <button
@@ -90,7 +102,7 @@ const { updateCartQuantity } = CartActionsHandler({ cartItems, setCartItems });
           </ul>
           {/* Display the total price */}
           <div className='cart-total'>
-            <h3>Total Price: {calculateTotal()} USD</h3>
+            <h3>Total Price: {calculateTotal()} {selectedCurrency}</h3>
           </div> 
         </>
       )}

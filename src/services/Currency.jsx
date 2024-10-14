@@ -1,55 +1,32 @@
-import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
-// Create the context
-export const CurrencyContext = createContext();
+const FIXER_API_KEY = 'bb540433bf623720dfb8ba40dd366e0b';
+const BASE_URL = `http://data.fixer.io/api/latest?access_key=${FIXER_API_KEY}`;
 
-const CurrencyProvider = ({ children }) => {
-  const [selectedCurrency, setSelectedCurrency] = useState('USD');
-  const [conversionRates, setConversionRates] = useState({});
-  const [prices, setPrices] = useState({});
+export const getCurrencyRates = async () => {
+  try {
+    // Fetch rates from EUR base currency
+    const response = await axios.get(BASE_URL);
 
-  // Fetch conversion rates from Fixer.io API
-  useEffect(() => {
-    const fetchConversionRates = async () => {
-      try {
-        const response = await axios.get('http://data.fixer.io/api/latest', {
-          params: {
-            access_key: 'bb540433bf623720dfb8ba40dd366e0b',
-          },
-        });
-        setConversionRates(response.data.rates);
-      } catch (error) {
-        console.error('Error fetching conversion rates:', error);
-      }
-    };
-    fetchConversionRates();
-  }, []);
-
-  // Function to convert price based on selected currency
-  const convertPrice = (priceInUSD) => {
-    if (selectedCurrency === 'USD' || !conversionRates[selectedCurrency]) {
-      return priceInUSD;
+    if (response.data && response.data.success) {
+      return response.data.rates; // Return the exchange rates
+    } else {
+      console.error('Error fetching currency rates', response.data);
+      return null;
     }
-    return (priceInUSD * conversionRates[selectedCurrency] / conversionRates['USD']).toFixed(2);
-  };
-
-  // Update prices globally when currency changes
-  const updatePrices = (products) => {
-    const updatedPrices = {};
-    products.forEach((product) => {
-      updatedPrices[product.id] = convertPrice(product.price);
-    });
-    setPrices(updatedPrices);
-  };
-
-  return (
-    <CurrencyContext.Provider
-      value={{ selectedCurrency, setSelectedCurrency, updatePrices, prices }}
-    >
-      {children}
-    </CurrencyContext.Provider>
-  );
+  } catch (error) {
+    console.error('API error:', error);
+    return null;
+  }
 };
 
-export default CurrencyProvider;
+// Function to convert price from EUR to the selected currency
+export const convertPrice = (priceInEUR, targetCurrency, rates) => {
+  const rate = rates[targetCurrency];
+  if (rate) {
+    return priceInEUR * rate; // Convert price from EUR to the target currency
+  } else {
+    console.error(`Rate for ${targetCurrency} not found`);
+    return priceInEUR; // Return price in EUR if conversion fails
+  }
+};

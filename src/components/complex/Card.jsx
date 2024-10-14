@@ -1,5 +1,7 @@
 import React  from 'react';
 
+
+
 const Cards = ({
   id,
   product_name,
@@ -7,6 +9,7 @@ const Cards = ({
   content,
   imageUrl,
   buttonText,
+  selectedCurrency // Receive the selected currency
 }) => {
   const AddToCart = () => {
     if(localStorage.getItem('cart-products')){
@@ -32,7 +35,7 @@ const Cards = ({
       )}
       <div className='card-body'>
         <h2 className='product_name'>{product_name}</h2>
-        <p className='price'>{price} USD </p>
+        <p className='price'>{price.toFixed(2)} {selectedCurrency} </p>
         <p className='card-content'>{content}</p>
         {buttonText && (
           <button onClick={AddToCart} className='card-button'>
