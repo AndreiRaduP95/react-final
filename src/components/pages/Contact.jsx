@@ -32,9 +32,11 @@ const Contact = () => {
 
         <h2>Social Media</h2>
         <p>Follow us on social media for updates and more!</p>
-        <a className='facebook' href='https://www.facebook.com/'><FaFacebook />  facebook.com/Shopware</a>
-        <a className='twitter' href='https://x.com/login'><AiFillTwitterCircle />  twitter.com/Shopware</a>
-        <a className='youtube' href='https://youtube.com/Shopware'><FaYoutube />  youtube.com/Shopware</a>
+        <div class="socialMedia">
+        <a className='facebook' href='https://www.facebook.com/'><FaFacebook /></a>
+        <a className='twitter' href='https://x.com/login'><AiFillTwitterCircle /></a>
+        <a className='youtube' href='https://youtube.com/Shopware'><FaYoutube /></a>
+        </div>
       </div>
       </div>
     </div>
