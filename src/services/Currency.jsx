@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const FIXER_API_KEY = 'bb540433bf623720dfb8ba40dd366e0b';
-const BASE_URL = `http://data.fixer.io/api/latest?access_key=${FIXER_API_KEY}`;
+const BASE_URL = `https://data.fixer.io/api/latest?access_key=${FIXER_API_KEY}`;
 
 export const getCurrencyRates = async () => {
   try {
