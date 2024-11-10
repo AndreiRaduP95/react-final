@@ -4,7 +4,7 @@ const ProductFetcher = ({ setProducts }) => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        'http://private-32dcc-products72.apiary-mock.com/product'
+        'https://private-32dcc-products72.apiary-mock.com/product'
       );
       const jsonData = await response.json();
       //Sort the products by price
